@@ -10,20 +10,26 @@ const projects = [
   {
     name: "Agent Jake",
     year: "'25",
-    desc: "Voice agent powered by 8 APIs to help users understand their insurance",
-    tech: ["python", "api 1", "api 2"],
+    desc: "Voice agent powered by eleven labs to help users understand their insurance, created to help peopelw ith disabilities take control fo their insurance",
+    tech: ["python", "Eleven Labs", "react", "HTML", "CSS",],
+  },
+ {
+    name: "Love You Afu",
+    year: "'26",
+    desc: "Full stack app for me and my sister to share daily memories, focused on nostalgia. Database si hosted by supabase",
+    tech: ["react", "HTML", "CSS","Supabase"],
   },
   {
     name: "Learnmips.com",
     year: "'25",
     desc: "Website that helps users learn MIPS assembly language",
-    tech: ["react", "node", "tech"],
+    tech: ["react", "HTML", "Typescript", "CSS", "OpenAI Api"],
   },
   {
     name: "Coding Tracker",
     year: "'25",
     desc: "A coding journal that tracks leetcode questions with notes and filters",
-    tech: ["react", "tech", "tech"],
+    tech: ["react", "HTML", "CSS", "Firebase"],
   },
 ];
 
@@ -31,14 +37,67 @@ const experience = [
   {
     role: "Co-Founder",
     company: "SayCut",
-    years: "2023 – now",
-    bullets: ["bullet point about what you did", "another thing you did", "one more achievement"],
+    years: "2023 – Present",
+    bullets: [
+      "Built a full-stack mobile app for real-time editing during recording",
+      "Drove growth through Instagram marketing (5K+ organic views)",
+      "Published to App Store and onboarded initial users (~20)"
+    ],
   },
+
   {
-    role: "Your Role",
-    company: "Company",
-    years: "20XX – 20XX",
-    bullets: ["bullet point about what you did", "another thing you did", "one more achievement"],
+    role: "Undergraduate Researcher",
+    company: "UT Dallas Neuroscience School",
+    years: "2025 – Present",
+    bullets: [
+      "Conduct neuroscience research using Python-based data analysis",
+      "Develop scripts for data cleaning, processing, and statistical analysis",
+      "Review research literature to support experimental design"
+    ],
+  },
+
+  {
+    role: "Data Analyst / Systems Developer",
+    company: "Women’s Health Platform",
+    years: "2024 – 2025",
+    bullets: [
+      "Designed relational database schemas for standardized patient data",
+      "Built SQL models with validation constraints for data integrity",
+      "Developed scalable database architecture for efficient data handling"
+    ],
+  },
+
+  {
+    role: "Software Engineering Intern",
+    company: "Coding Symmetry",
+    years: "2024",
+    bullets: [
+      "Built reusable CSS components to improve UI consistency",
+      "Developed interactive UI features and animations",
+      "Improved frontend usability and development efficiency"
+    ],
+  },
+
+  {
+    role: "President",
+    company: "Khidmah UTD",
+    years: "2025 – Present",
+    bullets: [
+      "Lead 40+ member consulting organization for small businesses",
+      "Managed client projects and team delivery workflows",
+      "Structured first-semester operations and growth systems"
+    ],
+  },
+
+  {
+    role: "Education Officer",
+    company: "ACM UTD",
+    years: "2025 – Present",
+    bullets: [
+      "Managed mentorship program for 100+ members",
+      "Coordinated mentor-mentee matching and engagement",
+      "Oversaw Discord community and educational initiatives"
+    ],
   },
 ];
 
@@ -55,7 +114,7 @@ export function AboutApp() {
       </p>
       <p className="text-base">
         Hi I'm Roha, I love building applications for myself.
-        This portfolio is inspired by little me, who would draw a phone on paper, with all the apps. I hope she would like this design
+        This portfolio is inspired by little me, who would draw a phone on paper and play for horus. I love building because it is a to express that creativity. I hope little me would like this design!
 
       </p>
       <div className="grid grid-cols-2 gap-3 pt-1">
