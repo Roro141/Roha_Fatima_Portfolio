@@ -114,7 +114,7 @@ export function AboutApp() {
       </p>
       <p className="text-base">
         Hi I'm Roha, I love building applications for myself.
-        This portfolio is inspired by little me, who would draw a phone on paper and play for horus. I love building because it is a to express that creativity. I hope little me would like this design!
+        This portfolio is inspired by little me, who would draw a phone on paper and play for horus. I love building because it is the best way to express that creativity. I hope little me would like this design!
 
       </p>
       <div className="grid grid-cols-2 gap-3 pt-1">
