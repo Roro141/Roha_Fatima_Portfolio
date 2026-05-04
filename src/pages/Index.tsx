@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { PaperWindow } from "@/components/PaperWindow";
+import { MobileView } from "@/components/MobileView";
 import {
   AboutApp, ProjectsApp, ResumeApp, GithubApp, LinkedinApp
 } from "@/components/PaperApps";
@@ -23,6 +24,7 @@ export default function Index() {
   const [zMap,      setZMap]      = useState<Record<string, number>>({ about: 1 });
   const [topZ,      setTopZ]      = useState(1);
   const [time,      setTime]      = useState("");
+  const [isMobile,  setIsMobile]  = useState(false);
 
   useEffect(() => {
     document.title = "Roha Fatima · portfolio";
@@ -30,7 +32,13 @@ export default function Index() {
       setTime(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
     tick();
     const t = setInterval(tick, 60000);
-    return () => clearInterval(t);
+
+    const mq = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mq.matches);
+    const onResize = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", onResize);
+
+    return () => { clearInterval(t); mq.removeEventListener("change", onResize); };
   }, []);
 
   const raise = (id: AppId) =>
@@ -40,8 +48,9 @@ export default function Index() {
       return n;
     });
 
-  // open or bring to front (if minimized, restore it)
   const toggle = (id: AppId) => {
+    if (id === "github")   { window.open("https://github.com/Roro141", "_blank"); return; }
+    if (id === "linkedin") { window.open("https://www.linkedin.com/in/roha-fatima-cs/", "_blank"); return; }
     if (minimized.includes(id)) {
       setMinimized(m => m.filter(x => x !== id));
       raise(id);
@@ -51,7 +60,7 @@ export default function Index() {
     raise(id);
   };
 
-  const close    = (id: AppId) => {
+  const close = (id: AppId) => {
     setOpen(o => o.filter(x => x !== id));
     setMinimized(m => m.filter(x => x !== id));
   };
@@ -60,18 +69,18 @@ export default function Index() {
     setMinimized(m => m.includes(id) ? m : [...m, id]);
   };
 
-  const restore  = (id: AppId) => {
+  const restore = (id: AppId) => {
     setMinimized(m => m.filter(x => x !== id));
     raise(id);
   };
 
-  // windows that are open but NOT minimized → render on desktop
   const visible = open.filter(id => !minimized.includes(id));
+
+  if (isMobile) return <MobileView />;
 
   return (
     <div className="relative w-screen h-screen overflow-hidden flex flex-col">
 
-      {/* top bar */}
       <header className="shrink-0 z-50 flex items-center justify-between px-4 py-1.5 border-b-2 border-dashed border-foreground/25 bg-paper/80">
         <span className="font-marker text-base text-foreground/70">Roha F.</span>
         <span className="font-scribble text-foreground/45 text-sm">{time}</span>
@@ -79,7 +88,6 @@ export default function Index() {
 
       <div className="flex flex-1 overflow-hidden" style={{ marginBottom: 44 }}>
 
-        {/* sidebar */}
         <aside className="shrink-0 z-40 w-20 flex flex-col items-center gap-1 pt-4 pb-4 border-r-2 border-dashed border-foreground/25 bg-paper/60">
           {APPS.map(a => (
             <button
@@ -100,7 +108,6 @@ export default function Index() {
           ))}
         </aside>
 
-        {/* desktop */}
         <main className="relative flex-1 overflow-hidden">
           <div className="absolute top-4 left-5 z-10 pointer-events-none select-none">
             <p className="font-marker text-3xl text-foreground leading-none">Roha Fatima</p>
@@ -128,11 +135,8 @@ export default function Index() {
         </main>
       </div>
 
-      {/* taskbar — shows minimized windows + clock */}
       <footer className="absolute bottom-0 left-0 right-0 z-50 h-11 flex items-center gap-2 px-3 border-t-2 border-dashed border-foreground/25 bg-paper/80">
         <span className="font-marker text-sm text-foreground/50 mr-2">Roha F.</span>
-
-        {/* minimized window chips */}
         {minimized.map(id => {
           const app = APPS.find(a => a.id === id);
           if (!app) return null;
@@ -148,7 +152,6 @@ export default function Index() {
             </button>
           );
         })}
-
         <span className="ml-auto font-scribble text-sm text-foreground/45">{time}</span>
       </footer>
     </div>
